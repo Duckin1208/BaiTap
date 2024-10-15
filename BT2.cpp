@@ -1,5 +1,4 @@
 #include <iostream>
-#include <unordered_set>
 using namespace std;
 bool Kiem_tra(int n){
     if(n < 2){
@@ -12,11 +11,9 @@ bool Kiem_tra(int n){
                 return false;
             }
         }
-    } else{
-        return true;
-    }
+    }      
+    return true;
 }
-
 bool is_blum_prime(int num) {
     return Kiem_tra(num) && num % 4 == 3;
 }
@@ -51,13 +48,14 @@ int* generate_blum_numbers(int n, int& blum_size) {
     delete[] blum_primes; 
     return blum_numbers; 
 }
-void Tim_tong(int* blum_numbers, int blum_size){
-    unordered_set<int> blum_set(blum_numbers, blum_numbers + blum_size); 
+void Tim_tong(int* blum_numbers, int blum_size) {
     for (int i = 0; i < blum_size; ++i) {
         for (int j = i; j < blum_size; ++j) {
             int sum = blum_numbers[i] + blum_numbers[j];
-            if (sum < blum_size && blum_set.find(sum) != blum_set.end()) {
-                cout << "(" << blum_numbers[i] << ", " << blum_numbers[j] << ")\n";
+            for(int k= 0;k<blum_size;k++){
+            if (sum == blum_numbers[k]) {
+               cout << "(" << blum_numbers[i] << ", " << blum_numbers[j]<<")" <<endl;
+            }
             }
         }
     }
@@ -83,9 +81,7 @@ int main() {
         cout << blum_numbers[i] << " ";
     }
     cout << endl;
-
     Tim_tong(blum_numbers, blum_size);
-    
     int M;
     cout << "Nhap M: ";
     cin >> M;
